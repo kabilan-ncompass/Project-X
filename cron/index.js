@@ -8,6 +8,7 @@ const {queryExecutor}=require('./db')
 // }
 
 // run()
+
 cron.schedule("0 * * * * *",async()=> {
     console.log("----------crone job----------")
     // const truncate = await trunc()
