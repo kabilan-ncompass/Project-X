@@ -4,11 +4,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.app {
-  text-align: center;
-}
 
-span {
+
+.err {
   color: red;
 }
 
@@ -66,22 +64,41 @@ input {
 }
 
 table {
+  margin: 10px auto;
   border-collapse: collapse;
-  width: 100%;
+  width: 80%;
 }
 
 th,
 td {
-  border: 1px solid #ffffff;
+  border: 1px solid #36454f;
   text-align: center;
   padding: 8px;
   font-size: 20px;
+  color: white;
 }
 
 th {
-  background-color: rgb(117, 250, 148);
+  background-color: rgba(255, 255, 255, 0.312);
+  color: black;
 }
 
-td {
-  background-color: rgb(196, 255, 207);
+td{
+  background-color: white;
+  color: black;
+}
+
+.nav{
+  color: #36454f;
+  display: flex;
+}
+
+
+.hover{
+  position: absolute;
+  background-color: #36454f;
+  right: 14%;
+  color: white;
+  top:55px;
+  padding: 5px;
 }

@@ -1,24 +1,33 @@
 import axios from "axios"
 import { useEffect, useState } from 'react'
-import { useParams } from "react-router"
+import { Navigate, useParams } from "react-router"
+import NavBar from "./NavBar";
+import "./styles/navbar.css"
 
 function DashBoard() {
-
+    const [hover,setHover] = useState(false) 
     const [data,setData] = useState([])
-    let {username} = useParams(); 
+    const [username,setUsername] = useState("")
+    let access_token = localStorage.getItem("access_token")
 
   useEffect(()=>{
     const getData = async() =>{ 
-        const data = (await axios.get(`http://localhost:3000/repo/${username}`)).data
+        let access_token = localStorage.getItem("access_token")
+        const data = (await axios.get(`http://localhost:3000/repo`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
+        const user = (await axios.get(`http://localhost:3000/user/profile`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
+        setUsername(user.username)
         setData(data)
         console.log(data)
     }
     getData()
   },[])
     
-
+  if(access_token){
   return (
-    <table>
+    <>
+        <NavBar setHover={setHover}/>
+        {hover?<><span className="hover">{username}</span></>:<></>}
+        <table>
         <thead>
             <tr>
             <th>ID</th>
@@ -28,14 +37,18 @@ function DashBoard() {
         </thead>
         <tbody>
             {data.map(e =>{
-                return <tr>
+                return <tr key={e.id}>
                     <td>{e.id}</td>
                     <td>{e.username}</td>
                     <td>{e.repo_name}</td>
                 </tr>
             })}
         </tbody>
-    </table>
+        </table>
+    </>
+  )}
+  return(
+    <Navigate to="/" />
   )
 }
 

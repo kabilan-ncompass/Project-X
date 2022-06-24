@@ -8,6 +8,7 @@ import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 import * as redisStore from 'cache-manager-redis-store';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -26,7 +27,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     store:redisStore,
     host: 'localhost',
     port: 6379
-  })],
+  }), AuthModule, ],
   controllers: [AppController],
   providers: [AppService,{
     provide: APP_INTERCEPTOR,

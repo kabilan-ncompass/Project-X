@@ -1,0 +1,6 @@
+repo/node_modules
+repo/dist
+
+frontend/node_modules
+
+cron/node_modules
