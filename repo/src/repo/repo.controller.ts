@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RepoService } from './repo.service';
 
 
@@ -6,9 +7,10 @@ import { RepoService } from './repo.service';
 export class RepoController {
   constructor(private readonly repoService: RepoService) {}
 
-
-  @Get(':username')
-  findOne(@Param('username') username: string) {
+  @UseGuards(JwtAuthGuard)
+  @Get('')
+  findOne(@Request() req) {
+    let {username} = req.user
     return this.repoService.findByUser(username);
   }
 

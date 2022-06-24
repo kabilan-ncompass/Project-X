@@ -1,54 +1,70 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
-// import { unstable_HistoryRouter } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
+import { toast } from 'react-toastify';
 
 
 export default function Login() {
-    const [username,setUsername]=useState('')
-    const [password,setPassword]=useState('')
-    const [msg,setMsg]=useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const history = useNavigate();
-  
-    const submitData=async (e)=> {
+
+    const submitData = async (e) => {
         e.preventDefault()
         let value = {
             username,
             password
         }
-        const data=(await axios.post("http://localhost:3000/user",value)).data
-        setMsg(data);
+        const data = (await axios.post("http://localhost:3000/user/login", value)).data
         console.log(data)
-        if(data === "Loginin success"){
-            history(`/dashboard/${username}`);
+        if (data.access_token) {
+            localStorage.setItem("access_token", data.access_token)
+            history(`/dashboard/`);
         } else {
-          setMsg("Invalid Username or Password");
+            toast.error("Invalid Username or Password");
+            setUsername("")
+            setPassword("")
         }
     }
-  return (
-    <div>
-        <h1>Login</h1>
-        
-        <form onSubmit={submitData}>
-            <label htmlFor="username"><b>Username</b></label> <br />
-            <input type="text"  autoComplete='false'
-            placeholder="Enter Username"
-            onChange={(e)=>{setUsername(e.target.value)}}
-            value={username}
-            /><br /> 
-            <span>{msg}</span>
-            <br />
-            <label htmlFor="password"><b>Password</b></label> <br />
-            <input type="password"  autoComplete='false' 
-            placeholder='Enter Password'
-            onChange={(e)=> {setPassword(e.target.value)}}
-            value={password}
-            /> <br /> 
-            <span>{msg}</span>
-            <br />
-            <button class="button-login">Login</button>
-        </form>
-    </div>
-  )
+    return (
+        <>
+        <NavBar/>
+            <div className='login'>
+            <h1>Login</h1>
+
+            <section className='form'>
+                <form onSubmit={submitData}>
+                    <div className='form-group'>
+                        <span>UserName</span>
+                        <br />
+                        <input type="text" autoComplete='false'
+                            placeholder="Enter Username"
+                            onChange={(e) => { setUsername(e.target.value) }}
+                            value={username}
+                        /><br />
+                    </div>
+                    <br />
+                    <div className='form-group'>
+                        <span>Password</span>
+                        <br />
+                        <input type="password" autoComplete='false'
+                            placeholder='Enter Password'
+                            onChange={(e) => { setPassword(e.target.value) }}
+                            value={password}
+                        />
+                    </div>
+                    <br />
+                    <br />
+                    <div className='form-group'>
+                        <button type='submit' className='btn btn-block'>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+        </>
+    )
 }

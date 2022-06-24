@@ -1,0 +1,15 @@
+.nav{
+  padding: 10px 10%;
+  background-color: #36454f;
+  display: flex;
+  height: 5vh;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subnav{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

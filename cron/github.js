@@ -23,7 +23,8 @@ const getContributors = async () => {
       }
     }
   } catch(err) {
-  console.log(err);}
+  console.log(err);
+}
 }
   return "done";
 };

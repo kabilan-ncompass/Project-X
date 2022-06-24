@@ -14,30 +14,15 @@ export class UserService {
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache
   ){}
 
-  async login(createUserDto: CreateUserDto) {
-    try {
-      const cachedItem:userInterface = await this.cacheManager.get('cached_item');
-      console.log(cachedItem)
-    if(cachedItem && cachedItem.username == createUserDto.username && cachedItem.password == createUserDto.password){
-      return "Loginin success"   
+  async getByUserName(username:string){
+    const cachedItem:userInterface = await this.cacheManager.get('user');
+    console.log(cachedItem)
+    if(cachedItem && cachedItem.username == username){
+      return cachedItem
     }
-    else{
-      let data = await this.getByEmail(createUserDto.username)
-      console.log(data)
-      if(data.length && createUserDto.password === data[0].password){
-       await this.cacheManager.set("cached_item",{"username":createUserDto.username,"password":createUserDto.password},{ttl:30})
-       return "Loginin success"      
-    }  
-  }
-      return "No details found"
-  } catch (error) {
-      console.log(error.message);  
-  }
-  }
-
-
-  async getByEmail(username:string){
-    return this.userRepository.find({where:{username:username}})
+    let userdata =await this.userRepository.findOne({where:{username:username}})
+    await this.cacheManager.set('user',{"username":userdata.username,"password":userdata.password},{ttl:30})
+    return userdata
   }
 
 }
