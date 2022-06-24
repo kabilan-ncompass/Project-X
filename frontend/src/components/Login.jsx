@@ -5,8 +5,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-
-
 export default function Login() {
     const [username,setUsername]=useState('')
     const [password,setPassword]=useState('')
@@ -49,7 +47,7 @@ export default function Login() {
             /> <br /> 
             <span>{msg}</span>
             <br />
-            <button class="button-login" role="button">Login</button>
+            <button class="button-login">Login</button>
         </form>
     </div>
   )
