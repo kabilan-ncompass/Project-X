@@ -64,3 +64,24 @@ input {
   width: 200px;
   height: 25px;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: center;
+  padding: 8px;
+  font-size: 20px;
+}
+
+th {
+  background-color: rgb(117, 250, 148);
+}
+
+td {
+  background-color: rgb(196, 255, 207);
+}
