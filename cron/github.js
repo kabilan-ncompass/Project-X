@@ -15,10 +15,13 @@ const getContributors = async () => {
     
     //const transpose=[];
     for(var i=0;i<repo_name.length;i++){
-      //console.log([id[i],names[i],repo_name[i]])
-      const sql=`insert into repo(id,username,repo_name) values (?,?,?)`;
-      let result=await queryExecutor(sql,[id[i],names[j],repo_name[i]]);
-      console.log(result);
+      try {
+        const sql=`insert into repo(id,username,repo_name) values (?,?,?)`;
+        let result=await queryExecutor(sql,[id[i],names[j],repo_name[i]]);
+        console.log(result);
+      } catch(err){
+        console.log(err);
+      }
     }
   } catch(err) {
   console.log(err);}
