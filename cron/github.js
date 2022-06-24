@@ -13,7 +13,6 @@ const getContributors = async () => {
     let id = response.data.map(e => e.id)
     let repo_name = response.data.map(e => e.name)
     
-    //const transpose=[];
     for(var i=0;i<repo_name.length;i++){
       try {
         const sql=`insert into repo(id,username,repo_name) values (?,?,?)`;

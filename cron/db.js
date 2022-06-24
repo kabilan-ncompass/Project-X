@@ -1,10 +1,11 @@
 const mysql=require('mysql2');
+require('dotenv').config();
 
 const con=mysql.createConnection({
-    host: 'l1-swift.ctqnawjozhfg.ap-southeast-2.rds.amazonaws.com',
-    user: 'kabilan',
-    password: 'kabilan99',
-    database: 'kabilan'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 })
 
 const queryExecutor = async(sql,params) =>{
