@@ -10,10 +10,10 @@ const {queryExecutor}=require('./db')
 // }
 
 // run()
-cron.schedule("5 * * * * *",async()=> {
+cron.schedule("0 * * * * *",async()=> {
     console.log("----------crone job----------")
-    const truncate = await trunc()
-    console.log("trtesdfgbffddf",truncate)
+    // const truncate = await trunc()
+    // console.log("trtesdfgbffddf",truncate)
     const data=await getContributors();
     console.log(data);
 })
