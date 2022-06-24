@@ -3,17 +3,13 @@ import DashBoard from './components/DashBoard';
 import {
   BrowserRouter,
   Routes,
-  Route,
-  useNavigate,
-  Navigate
+  Route
 } from "react-router-dom";
 import Login from './components/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  
-  let access_token = localStorage.getItem("access_token")
 
   return (
     <div className="app">
