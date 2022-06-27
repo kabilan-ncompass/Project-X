@@ -17,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
   }),  TypeOrmModule.forRoot({
     type: 'mysql',
     host: process.env.host,
-    port: 3306,
+    port: Number(process.env.mysql_port),
     username: process.env.user,
     password: process.env.password,
     database: process.env.db,
@@ -28,8 +28,8 @@ import { ConfigModule } from '@nestjs/config';
   UserModule, CacheModule.register({
     isGlobal:true,
     store:redisStore,
-    host: 'localhost',
-    port: 6379
+    host: process.env.redis_host,
+    port: process.env.redis_port,
   }), AuthModule, ],
   controllers: [AppController],
   providers: [AppService,{

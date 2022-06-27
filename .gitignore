@@ -6,3 +6,8 @@ frontend/node_modules
 cron/node_modules
 
 **node_modules
+
+# ignore .env files in backend, frontend, cron folders
+/backend/**/.env
+/frontend/**/.env
+/cron/**/.env
