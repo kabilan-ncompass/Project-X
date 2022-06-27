@@ -13,7 +13,7 @@ function DashBoard() {
   useEffect(()=>{
     const getData = async() =>{ 
         let access_token = localStorage.getItem("access_token")
-        const data = (await axios.get(`http://localhost:3000/repo`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
+        const data = (await axios.get(`http://localhost:3000/repo/getRepo`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
         const user = (await axios.get(`http://localhost:3000/user/profile`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
         setUsername(user.username)
         setData(data)

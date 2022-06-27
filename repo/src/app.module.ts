@@ -9,15 +9,18 @@ import { UserModule } from './user/user.module';
 import * as redisStore from 'cache-manager-redis-store';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [ConfigModule.forRoot({
+    isGlobal: true,
+  }),  TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'l1-swift.ctqnawjozhfg.ap-southeast-2.rds.amazonaws.com',
+    host: process.env.host,
     port: 3306,
-    username: 'kabilan',
-    password: 'kabilan99',
-    database: 'kabilan',
+    username: process.env.user,
+    password: process.env.password,
+    database: process.env.db,
     entities: [Repo,User],
     synchronize: true,
   }),

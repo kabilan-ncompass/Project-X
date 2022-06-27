@@ -1,6 +1,7 @@
-import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cache } from 'cache-manager';
+import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -15,14 +16,18 @@ export class UserService {
   ){}
 
   async getByUserName(username:string){
-    const cachedItem:userInterface = await this.cacheManager.get('user');
-    console.log(cachedItem)
-    if(cachedItem && cachedItem.username == username){
-      return cachedItem
+    try {
+        const cachedItem:userInterface = await this.cacheManager.get('user');
+        console.log(cachedItem)
+      if(cachedItem && cachedItem.username == username){
+        return cachedItem
+      }
+      let userdata =await this.userRepository.findOne({where:{username:username}})
+      await this.cacheManager.set('user',{"username":userdata.username,"password":userdata.password},{ttl:30})
+      return userdata 
+    } catch (error) {
+      throw new InternalServerErrorException(error.message)
     }
-    let userdata =await this.userRepository.findOne({where:{username:username}})
-    await this.cacheManager.set('user',{"username":userdata.username,"password":userdata.password},{ttl:30})
-    return userdata
   }
 
 }
