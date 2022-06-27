@@ -4,3 +4,5 @@ repo/dist
 frontend/node_modules
 
 cron/node_modules
+
+**node_modules
