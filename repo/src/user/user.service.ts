@@ -23,7 +23,6 @@ export class UserService {
         return cachedItem
       }
       let userdata =await this.userRepository.findOne({where:{username:username}})
-      if(!userdata) throw new NotFoundException("Not found")
       await this.cacheManager.set('user',{"username":userdata.username,"password":userdata.password},{ttl:30})
       return userdata 
     } catch (error) {

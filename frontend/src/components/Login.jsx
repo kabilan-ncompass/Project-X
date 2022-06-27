@@ -13,20 +13,27 @@ export default function Login() {
 
     const submitData = async (e) => {
         e.preventDefault()
+        if(!username || !password){
+            toast.error("fields should not be empty")
+            return
+        }
+
         let value = {
             username,
             password
         }
-        const data = (await axios.post("http://localhost:3000/user/login", value)).data
-        console.log(data)
-        if (data.access_token) {
+        try {
+            const data = (await axios.post("http://localhost:3000/user/login", value)).data
+            console.log(data)
             localStorage.setItem("access_token", data.access_token)
             history(`/dashboard/`);
-        } else {
-            toast.error("Invalid Username or Password");
-            setUsername("")
+        } catch (error) {
+            toast.error("Invalid username or password")
             setPassword("")
+            setUsername("")
         }
+        
+        
     }
     return (
         <>
