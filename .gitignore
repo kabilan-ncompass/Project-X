@@ -6,3 +6,10 @@ frontend/node_modules
 cron/node_modules
 
 **node_modules
+
+# Remove all node_modules
+find . -name "node_modules" -exec rm -rf {} \;
+
+
+# ignore .env files in all folders
+**/.env
