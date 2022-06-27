@@ -1,6 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const {queryExecutor}=require('./db')
+const log=require('simple-node-logger').createSimpleLogger('logs/cron.log');
 
 const getContributors = async () => {
   const names=['uk0724','iamkabilan'];
@@ -17,22 +18,21 @@ const getContributors = async () => {
       try {
         const sql=`insert into repo(id,username,repo_name) values (?,?,?)`;
         let result=await queryExecutor(sql,[id[i],names[j],repo_name[i]]);
-        console.log(result);
+        log.setLevel('info');
+        log.info(`${repo_name[i]} inserted`);
       } catch(err){
-        console.log(err);
+        log.setLevel('Warning');
+        log.warn(err.message);
       }
     }
   } catch(err) {
-  console.log(err);
+    log.setLevel('Warning');
+    log.warn(err.message);
 }
 }
   return "done";
 };
 
-const trunc = async() =>{
-  const data = await queryExecutor("truncate repo")
-  return data
-}
 module.exports = {
-  getContributors,trunc
+  getContributors
 };
