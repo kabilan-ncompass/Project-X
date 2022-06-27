@@ -1,8 +1,20 @@
 # Project-x
 Use github username in login page to get your repositories.
 
+## Tech Stack
+### Frontend
+- [React](https://reactjs.org/)
 
-## How to run
+### Backend
+- [NestJS](https://nestjs.com/)
+- [TypeORM](https://typeorm.io/)
+- [MySQL](https://www.mysql.com/)
+
+### CRON
+- [NodeJS](https://nodejs.org/)
+- [Cron](https://www.npmjs.com/package/node-cron) - cron command-line utility is a job scheduler on Unix-like operating systems. Users who set up and maintain software environments use cron to schedule jobs, also known as cron jobs, to run periodically at fixed times, dates, or intervals.
+
+## How to run Backend
 ```
 # start server
 npm start or npm run start:dev in development
@@ -38,8 +50,8 @@ Route      | Method | Description
 ##### HTTP Request Body Example
 ```javascript
 {
-    "EMAIL" : "Narayan@gmail.com",
-    "PASSWORD" : "Narayan"
+    "username" : "uk0724",
+    "password" : "*****"
 }
 ```
 
@@ -66,14 +78,32 @@ Repo details will be fetched after logingin
     {
     [
         {
-            "post_id": 13,
-            "title": "types of elements in html",
-            "description": "inline,block",
-            "tag": "HTML,CSS"
+            "id": "400062373",
+            "username": "uk0724",
+            "repo_name": "lab-cricpro-scoreboard"
         }
     ]
 }
 }
 ```
+'
+
+# SCREENSHOTS
+
+## Login page
+![Alt text](images/login.png)
+
+## Login page if invalid credential are entered
+![Alt text](images/login_error.png)
+
+
+## DASHBOARD PAGE
+![Alt text](images/dashboard.png)
+
+
+## DASHBOARD video
+
+
+https://user-images.githubusercontent.com/105187981/175877571-bd74bc38-6cd8-461e-b6e5-30c68ba60586.mp4
 
 
