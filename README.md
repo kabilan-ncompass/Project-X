@@ -79,14 +79,14 @@ Repo details will be fetched after logingin
 # SCREENSHOTS
 
 ## Login page
-![Alt text](images\login.png)
+![Alt text](images/login.png)
 
 ## Login page if invalid credential are entered
-![Alt text](images\login_error.png)
+![Alt text](images/login_error.png)
 
 
 ## DASHBOARD PAGE
-![Alt text](images\dashboard.png)
+![Alt text](images/dashboard.png)
 
 
 ## DASHBOARD video
