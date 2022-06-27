@@ -2,7 +2,7 @@
 Use github username in login page to get your repositories.
 
 
-## How to run
+## How to run Backend
 ```
 # start server
 npm start or npm run start:dev in development
@@ -66,14 +66,28 @@ Repo details will be fetched after logingin
     {
     [
         {
-            "post_id": 13,
-            "title": "types of elements in html",
-            "description": "inline,block",
-            "tag": "HTML,CSS"
+            "id": "400062373",
+            "username": "uk0724",
+            "repo_name": "lab-cricpro-scoreboard"
         }
     ]
 }
 }
 ```
+'
 
+# SCREENSHOTS
+
+## Login page
+![Alt text](images\login.png)
+
+## Login page if invalid credential are entered
+![Alt text](images\login_error.png)
+
+
+## DASHBOARD PAGE
+![Alt text](images\dashboard.png)
+
+
+## DASHBOARD video
 
