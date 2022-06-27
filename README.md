@@ -38,8 +38,8 @@ Route      | Method | Description
 ##### HTTP Request Body Example
 ```javascript
 {
-    "EMAIL" : "Narayan@gmail.com",
-    "PASSWORD" : "Narayan"
+    "username" : "uk0724",
+    "password" : "*****"
 }
 ```
 
