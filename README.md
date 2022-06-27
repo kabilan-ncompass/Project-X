@@ -89,8 +89,17 @@ Repo details will be fetched after logingin
 '
 
 # SCREENSHOTS
-## System Architecture
+
+## UML Diagram
 ![](images/system.png)
+
+
+## System Design
+![](images/project-x-1.png)
+
+
+## Flowchart
+![](images/project-x-2.png)
 
 ## Login page
 ![Alt text](images/login.png)
