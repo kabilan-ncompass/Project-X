@@ -10,8 +10,6 @@ const connection=()=> {
             database: process.env.DB_NAME
         })
         return con
-
-    
 }
 
 const queryExecutor = async(sql,params) =>{
