@@ -89,6 +89,8 @@ Repo details will be fetched after logingin
 '
 
 # SCREENSHOTS
+## System Architecture
+![](images/system.png)
 
 ## Login page
 ![Alt text](images/login.png)
