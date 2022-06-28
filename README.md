@@ -14,10 +14,28 @@ Use github username in login page to get your repositories.
 - [NodeJS](https://nodejs.org/)
 - [Cron](https://www.npmjs.com/package/node-cron) - cron command-line utility is a job scheduler on Unix-like operating systems. Users who set up and maintain software environments use cron to schedule jobs, also known as cron jobs, to run periodically at fixed times, dates, or intervals.
 
+## How to start redis
+```
+# start redis
+sudo service redis-server start
+```
+
 ## How to run Backend
 ```
 # start server
 npm start or npm run start:dev in development
+```
+
+## How to start cron
+```
+# start cron
+npm start
+```
+
+## How to run Frontend
+```
+# start server
+npm start
 ```
 
 ## How to test
