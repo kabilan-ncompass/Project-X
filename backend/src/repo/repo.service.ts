@@ -22,7 +22,11 @@ export class RepoService {
       const repo = await this.cacheManager.get(`${username}_repo`);
       // console.log("cache *******************************************************",repo)
       if(repo){
-        return repo
+        return {
+          "success" : true,
+          "message" : `sucessfully fetched`,
+          "data" : repo
+        }; 
       }
       const data = await this.repoRepository.find({where:{username:username}});
       if(data.length == 0){
