@@ -23,7 +23,7 @@ export class UserService {
         return cachedItem
       }
       let userdata =await this.userRepository.findOne({where:{username:username}})
-      await this.cacheManager.set('user',{"username":userdata.username,"password":userdata.password},{ttl:30})
+      await this.cacheManager.set('user',{"username":userdata.username,"password":userdata.password},{ttl:3600})
       return userdata 
     } catch (error) {
       throw new InternalServerErrorException(error.message)

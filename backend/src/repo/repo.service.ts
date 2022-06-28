@@ -1,4 +1,4 @@
-import { CACHE_MANAGER, Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cache } from 'cache-manager';
 import { Repository } from 'typeorm';
@@ -20,17 +20,21 @@ export class RepoService {
   async findByUser(username: string) {
     try {
       const repo = await this.cacheManager.get(`${username}_repo`);
-      console.log("cache *******************************************************",repo)
+      // console.log("cache *******************************************************",repo)
       if(repo){
         return repo
       }
       const data = await this.repoRepository.find({where:{username:username}});
       if(data.length == 0){
-        return "No details found"
+       throw new NotFoundException("No details found")
       }
-      await this.cacheManager.set(`${username}_repo`,data,{ttl:30})
-      console.log("data *************************************************",data)
-      return data; 
+      await this.cacheManager.set(`${username}_repo`,data,{ttl:3600})
+      // console.log("data *************************************************",data)
+      return {
+        "success" : true,
+        "message" : `sucessfully fetched ${data.length}`,
+        "data" : data
+      }; 
     } catch (error) {
       throw new InternalServerErrorException(error.message)
     }
