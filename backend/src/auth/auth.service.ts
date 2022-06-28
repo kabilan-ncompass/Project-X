@@ -11,11 +11,9 @@ export class AuthService {
   async validateUser(username: string, pass: string): Promise<any> {
     // console.log(username,pass)
     const user = await this.usersService.getByUserName(username);
-    if(user){
-        if(user.password == pass){
+    if(user && user.password == pass){
             const {password, ...rest} = user;
             return rest;
-        }
 
     }else{
         throw new NotFoundException('User not found')

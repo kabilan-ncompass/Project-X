@@ -20,7 +20,7 @@ export class RepoService {
   async findByUser(username: string) {
     try {
       const repo = await this.cacheManager.get(`${username}_repo`);
-      console.log("cache *******************************************************",repo)
+      // console.log("cache *******************************************************",repo)
       if(repo){
         return repo
       }
@@ -28,8 +28,8 @@ export class RepoService {
       if(data.length == 0){
        throw new NotFoundException("No details found")
       }
-      await this.cacheManager.set(`${username}_repo`,data,{ttl:30})
-      console.log("data *************************************************",data)
+      await this.cacheManager.set(`${username}_repo`,data,{ttl:3600})
+      // console.log("data *************************************************",data)
       return {
         "success" : true,
         "message" : `sucessfully fetched ${data.length}`,
