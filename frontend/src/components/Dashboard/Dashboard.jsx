@@ -18,7 +18,6 @@ function Dashboard() {
         const user = (await axios.get(`http://localhost:3000/user/profile`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
         setUsername(user.username)
         setData(data.data)
-        console.log(data.data)
     }
     getData()
   },[])

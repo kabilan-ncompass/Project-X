@@ -24,7 +24,6 @@ export default function Login() {
         }
         try {
             const data = (await axios.post("http://localhost:3000/user/login", value)).data
-            console.log(data)
             localStorage.setItem("access_token", data.data.access_token)
             history(`/dashboard/`);
         } catch (error) {
