@@ -10,7 +10,4 @@ export class Repo {
 
     @Column()
     repo_name: string;
-
-    // @Column()
-    // contributors: number;
 }

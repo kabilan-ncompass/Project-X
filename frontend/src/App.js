@@ -1,11 +1,10 @@
-import './App.css';
-import DashBoard from './components/DashBoard';
+import DashBoard from './components/Dashboard/Dashboard';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
-import Login from './components/Login';
+import Login from './components/Login/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

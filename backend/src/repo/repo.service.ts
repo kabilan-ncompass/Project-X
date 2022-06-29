@@ -10,35 +10,28 @@ export class RepoService {
     @InjectRepository(Repo)
     private repoRepository: Repository<Repo>,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache
-  ){}
-
-  // async findAll() {
-  //   const data = await this.repoRepository.find();
-  //   return data; 
-  // }
+  ) { }
 
   async findByUser(username: string) {
     try {
       const repo = await this.cacheManager.get(`${username}_repo`);
-      // console.log("cache *******************************************************",repo)
-      if(repo){
+      if (repo) {
         return {
-          "success" : true,
-          "message" : `sucessfully fetched`,
-          "data" : repo
-        }; 
+          "success": true,
+          "message": `sucessfully fetched`,
+          "data": repo
+        };
       }
-      const data = await this.repoRepository.find({where:{username:username}});
-      if(data.length == 0){
-       throw new NotFoundException("No details found")
+      const data = await this.repoRepository.find({ where: { username: username } });
+      if (data.length == 0) {
+        throw new NotFoundException("No details found")
       }
-      await this.cacheManager.set(`${username}_repo`,data,{ttl:3600})
-      // console.log("data *************************************************",data)
+      await this.cacheManager.set(`${username}_repo`, data, { ttl: 3600 })
       return {
-        "success" : true,
-        "message" : `sucessfully fetched ${data.length}`,
-        "data" : data
-      }; 
+        "success": true,
+        "message": `sucessfully fetched ${data.length}`,
+        "data": data
+      };
     } catch (error) {
       throw new InternalServerErrorException(error.message)
     }

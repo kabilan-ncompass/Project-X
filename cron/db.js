@@ -18,8 +18,6 @@ const queryExecutor = async(sql,params) =>{
         let [result,fields] = await con.promise().query(sql,params)
         return result
     } catch (error) {
-        //log.setLevel('warn');
-        //log.warn(error.message);
         throw error
     }
 }

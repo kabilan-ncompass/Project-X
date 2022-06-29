@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import NavBar from './NavBar';
+import NavBar from '../NavBar/NavBar';
 import { toast } from 'react-toastify';
-
+import "../Login/login.css"
 
 export default function Login() {
     const [username, setUsername] = useState('')
