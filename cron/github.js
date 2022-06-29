@@ -4,22 +4,23 @@ const {queryExecutor}=require('./db')
 const log=require('simple-node-logger').createSimpleLogger('logs/cron.log');
 
 const getContributors = async () => {
-  const names=['uk0724','iamkabilan'];
+  const users=await queryExecutor('SELECT * FROM user',[]);
+  const usernames=users.map(user=>user.username);
 
-  for(let j=0;j<names.length;j++) {
-    const url = `https://api.github.com/users/${names[j]}/repos`;
+  for(let user=0;user<usernames.length;user++) {
+    const url = `https://api.github.com/users/${usernames[user]}/repos`;
     try {
     const response = await axios.get(url)
     
-    let id = response.data.map(e => e.id)
-    let repo_name = response.data.map(e => e.name)
+    const id = response.data.map(e => e.id)
+    const repo_name = response.data.map(e => e.name)
     
-    for(var i=0;i<repo_name.length;i++){
+    for(let row=0;row<repo_name.length;row++){
       try {
         const sql=`insert into repo(id,username,repo_name) values (?,?,?)`;
-        let result=await queryExecutor(sql,[id[i],names[j],repo_name[i]]);
+        await queryExecutor(sql,[id[row],usernames[user],repo_name[row]]);
         log.setLevel('info');
-        log.info(`${repo_name[i]} inserted`);
+        log.info(`${repo_name[row]} inserted`);
       } catch(err){
         log.setLevel('Warning');
         log.warn(err.message);

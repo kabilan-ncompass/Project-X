@@ -1,14 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from 'react'
-import { Navigate } from "react-router"
-import NavBar from "./NavBar";
-import "./styles/navbar.css"
+import NavBar from "../NavBar/NavBar";
+import "../NavBar/navbar.css"
+import "../Dashboard/dashboard.css"
 
-function DashBoard() {
+function Dashboard() {
     const [hover,setHover] = useState(false) 
     const [data,setData] = useState([])
     const [username,setUsername] = useState("")
-    let access_token = localStorage.getItem("access_token")
+
 
   useEffect(()=>{
     const getData = async() =>{ 
@@ -17,12 +17,10 @@ function DashBoard() {
         const user = (await axios.get(`http://localhost:3000/user/profile`,{headers:{"Authorization": `Bearer ${access_token}`}})).data
         setUsername(user.username)
         setData(data.data)
-        console.log(data.data)
     }
     getData()
   },[])
     
-  if(access_token){
   return (
     <>
         <NavBar setHover={setHover}/>
@@ -46,10 +44,8 @@ function DashBoard() {
         </tbody>
         </table>
     </>
-  )}
-  return(
-    <Navigate to="/" />
   )
+
 }
 
-export default DashBoard
+export default Dashboard
