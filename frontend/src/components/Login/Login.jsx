@@ -6,11 +6,12 @@ import NavBar from '../NavBar/NavBar';
 import { toast } from 'react-toastify';
 import "../Login/login.css"
 
-export default function Login() {
+export default function Login({setAccesstoken}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const history = useNavigate();
 
+    
     const submitData = async (e) => {
         e.preventDefault()
         if(!username || !password){
@@ -25,6 +26,7 @@ export default function Login() {
         try {
             const data = (await axios.post("http://localhost:3000/user/login", value)).data
             localStorage.setItem("access_token", data.data.access_token)
+            setAccesstoken(data.data.access_token)
             history(`/dashboard/`);
         } catch (error) {
             toast.error("Invalid username or password")
