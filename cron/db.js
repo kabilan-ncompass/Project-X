@@ -15,7 +15,7 @@ const connection=()=> {
 const queryExecutor = async(sql,params) =>{
     try {
         const con = connection();
-        let [result,fields] = await con.promise().query(sql,params)
+        const [result,fields] = await con.promise().query(sql,params)
         return result
     } catch (error) {
         throw error
